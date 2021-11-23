@@ -1,27 +1,19 @@
-/* 
-The users and todos variables have all the data for you to work with
-Check your console to see the result of the following console.logs, 
-and inspect the data
-*/
-
-console.log("users: ", window.users);
-
-console.log("todos: ", window.todos);
-
 let userLetter = prompt(`Enter the letter`)
 
-let listAllUsersName = users.filter(function (user) {
+const foundUser = users.filter(function (user) {
     return user.name.includes(userLetter)
-}).map(function (user) {
-    return user.name
 })
 
-for (userName of listAllUsersName) {
-    console.log(`Hi, ${userName}`)
-}
-
-function sayHi(){
-    return (`Hi, ${listAllUsersName}`)
+let userIndex = 0
+if (foundUser.length > 0) {
+    const intervalId = setInterval(function () {
+        const user = foundUser[userIndex]
+        console.log(`Hi, ${user.name}`)
+        userIndex += 1
+        if (userIndex === foundUser.length) clearInterval(intervalId)
+    }, 2000)
+} else {
+    console.log('Found no users...')
 }
 
 let userIdInput = Number(prompt("Enter the user Id"))
